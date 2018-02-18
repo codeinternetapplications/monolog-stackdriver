@@ -1,0 +1,30 @@
+{
+    "name": "codeinternetapplications/monolog-stackdriver",
+    "description": "Stackdriver handler for Monolog.",
+    "keywords": ["log", "logging", "stackdriver", "gcp", "google cloud", "laravel", "lumen"],
+    "homepage": "http://github.com/codeinternetapplications/monolog-stackdriver",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Martin van Dam",
+            "email": "martin@code.nl",
+            "homepage": "https://www.code.nl"
+        },
+        {
+            "name": "Wouter Monkhorst",
+            "email": "wouter@code.nl",
+            "homepage": "https://www.code.nl"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "monolog/monolog": ">=1.23",
+        "google/cloud": ">=0.50.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "CodeInternetApplications\\MonologStackdriver\\": "src/"
+        }
+    }
+}
