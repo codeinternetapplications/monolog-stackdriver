@@ -22,10 +22,10 @@ class StackdriverHandler extends AbstractProcessingHandler
     private $logger;
 
     /**
-     * @param string  Name of your log
-     * @param array   Google\Cloud\Logging\LoggingClient valid options
-     * @param int     $level  The minimum logging level at which this handler will be triggered
-     * @param Boolean $bubble Whether the messages that are handled can bubble up the stack or not
+     * @param string  $logName              Name of your log
+     * @param array   $loggingClientOptions Google\Cloud\Logging\LoggingClient valid options
+     * @param int     $level                The minimum logging level at which this handler will be triggered
+     * @param Boolean $bubble               Whether the messages that are handled can bubble up the stack or not
      */
     public function __construct($logName, $loggingClientOptions, $level = Logger::DEBUG, $bubble = true)
     {

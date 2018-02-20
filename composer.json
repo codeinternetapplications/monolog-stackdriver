@@ -1,7 +1,7 @@
 {
     "name": "codeinternetapplications/monolog-stackdriver",
     "description": "Stackdriver handler for Monolog.",
-    "keywords": ["log", "logging", "stackdriver", "gcp", "google cloud", "laravel", "lumen"],
+    "keywords": ["monolog", "log", "logging", "stackdriver", "gcp", "google cloud", "gcp", "laravel", "lumen"],
     "homepage": "http://github.com/codeinternetapplications/monolog-stackdriver",
     "type": "library",
     "license": "MIT",
