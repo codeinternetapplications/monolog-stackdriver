@@ -8,7 +8,7 @@ Edit `bootstrap/app.php` and enable `$app->withFacades();`.
 
 Make sure to have a [copy of config/logging.php from the Laravel/Laravel 5.6.* framework](https://github.com/laravel/laravel/blob/master/config/logging.php) stored in your project. Then you can add the following entry to the `channels` section in the array below the existing entries.
 
-```
+```php
 'channels' => [
 
     // ( ... )
@@ -19,7 +19,8 @@ Make sure to have a [copy of config/logging.php from the Laravel/Laravel 5.6.* f
         'logName' => 'my-project-log',
         'loggingClientOptions' => [
             'keyFilePath' => '/path/to/service-account-key-file.json',
-        ]
+        ],
+        // 'entryOptionsWrapper' => 'stackdriver'
     ],
 ]
 ```

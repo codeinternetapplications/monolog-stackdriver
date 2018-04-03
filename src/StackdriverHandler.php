@@ -21,18 +21,39 @@ class StackdriverHandler extends AbstractProcessingHandler
      */
     private $logger;
 
+    /** 
+     * A context array key used to take log entry options from
+     * @var string
+     */
+    private $entryOptionsWrapper;
+
+    /**
+     * Log entry options (all but severity) as supported by Google\Cloud\Logging\Logger::entry
+     * @var array Entry options.
+     */
+    private $entryOptions = [
+        'resource',
+        'httpRequest',
+        'labels',
+        'operation',
+        'insertId',
+        'timestamp',
+    ];
+
     /**
      * @param string  $logName              Name of your log
      * @param array   $loggingClientOptions Google\Cloud\Logging\LoggingClient valid options
+     * @param string  $entryOptionsWrapper  Array key used in the context array to take Google\Cloud\Logging\Entry options from
      * @param int     $level                The minimum logging level at which this handler will be triggered
      * @param Boolean $bubble               Whether the messages that are handled can bubble up the stack or not
      */
-    public function __construct($logName, $loggingClientOptions, $level = Logger::DEBUG, $bubble = true)
+    public function __construct($logName, $loggingClientOptions, $entryOptionsWrapper = 'stackdriver', $level = Logger::DEBUG, $bubble = true)
     {
         parent::__construct($level, $bubble);
 
-        $this->logger = (new LoggingClient($loggingClientOptions))->logger($logName);
-        $this->formatter = new LineFormatter('%message%');
+        $this->logger              = (new LoggingClient($loggingClientOptions))->logger($logName);
+        $this->formatter           = new LineFormatter('%message%');
+        $this->entryOptionsWrapper = $entryOptionsWrapper;
     }
 
     /**
@@ -43,15 +64,39 @@ class StackdriverHandler extends AbstractProcessingHandler
      */
     protected function write(array $record)
     {
+        $options = $this->getOptionsFromRecord($record);
+
         $data = [
             'message' => $record['message'],
             'data'    => $record['context']
         ];
 
-        $entry = $this->logger->entry($data, [
-            'severity' => $record['level_name']
-        ]);
+        $entry = $this->logger->entry($data, $options);
 
         $this->logger->write($entry);
+    }
+
+    /**
+     * Get the Google\Cloud\Logging\Entry options
+     *
+     * @param  array $record by reference
+     * @return array $options
+     */
+    private function getOptionsFromRecord(array &$record)
+    {
+        $options = [
+            'severity' => $record['level_name']
+        ];
+
+        if (isset($record['context'][$this->entryOptionsWrapper])) {
+            foreach ($this->entryOptions as $entryOption) {
+                if (isset($record['context'][$this->entryOptionsWrapper][$entryOption]) && $record['context'][$this->entryOptionsWrapper][$entryOption]) {
+                    $options[$entryOption] = $record['context'][$this->entryOptionsWrapper][$entryOption];
+                }
+            }
+            unset($record['context'][$this->entryOptionsWrapper]);
+        }
+
+        return $options;
     }
 }

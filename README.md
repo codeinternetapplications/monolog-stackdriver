@@ -18,11 +18,114 @@ If you don't have this file yet, you can create it via [Google Cloud Platform - 
 
 ## Google\Cloud\Logging\LoggingClient options
 
-Please read the documentation for the [Google\Cloud\Logging\LoggingClient](https://googlecloudplatform.github.io/google-cloud-php/#/docs/google-cloud/v0.54.0/logging/loggingclient?method=__construct) for other authentication options and further specific connection and setup.
+Please read the documentation for the [Google\Cloud\Logging\LoggingClient](https://googlecloudplatform.github.io/google-cloud-php/#/docs/google-cloud/v0.58.1/logging/loggingclient?method=__construct) for other authentication options and further specific connection and setup.
 
-## Pick your framework to continue
+## Google\Cloud\Logging\Entry options
+
+Please read the documentation for the [Google\Cloud\Logging\Entry setup via Google\Cloud\Logging\Logger](http://googlecloudplatform.github.io/google-cloud-php/#/docs/google-cloud/v0.58.1/logging/logger?method=entry) for specific details about these options.
+
+By default, you can add Stackdriver specific log entry options by adding these wrapped in the `stackdriver`-key inside the context array.
+
+```php
+$context['stackdriver'] = [
+    // stackdriver related entry options
+];
+```
+
+If you need to, you can override this key name by setting `$entryOptionsWrapper` to your own value (string) when using `StackdriverHandler::__construct`.
+
+## Pick your framework for some specific setup
 
 * [Laravel/Laravel v5.5](docs/laravel_laravel_v5_5.md)
 * [Laravel/Laravel v5.6](docs/laravel_laravel_v5_6.md)
 * [Laravel/Lumen v5.5](docs/laravel_lumen_v5_5.md)
 * [Laravel/Lumen v5.6](docs/laravel_lumen_v5_6.md)
+
+# Vanilla usage
+
+```php
+use Monolog\Logger;
+use CodeInternetApplications\MonologStackdriver\StackdriverHandler;
+
+// ( ... )
+
+// GCP Project ID
+$projectId = 'eg-my-project-id-148223';
+
+// See Google\Cloud\Logging\LoggingClient::__construct
+$loggingClientOptions = [
+    'keyFilePath' => '/path/to/service-account-key-file.json'
+];
+
+// init handler
+$stackdriverHandler = new StackdriverHandler(
+    $projectId,
+    $loggingClientOptions
+);
+
+// init logger with StackdriverHandler
+$logger = new Logger('stackdriver', [$stackdriverHandler]);
+
+// basic info log with contextual data
+$logger->info('New order', ['orderId' => 1001]);
+```
+
+```php
+// ( ... )
+
+// add specific log entry options, eg labels
+$context = ['orderId' => 1001];
+
+// add a 'stackdriver' entry to the context to append
+// log entry specific options
+$context['stackdriver'] = [
+    'labels' => [
+        'action' => 'payed'
+    ]
+];
+$logger->info('Order update', $context);
+```
+
+```php
+// ( ... )
+
+// add specific log entry options, eg labels and operation
+$context = ['orderId' => 1001];
+$context['stackdriver'] = [
+    'labels' => [
+        'order' => 'draft'
+    ],
+    'operation' => [
+        'id' => 'order-1001',
+        'first' => true,
+        'last' => false
+    ]
+];
+$logger->info('Order update', $context);
+
+// update both label and operation
+$context['stackdriver'] = [
+    'labels' => [
+        'order' => 'paid'
+    ],
+    'operation' => [
+        'id' => 'order-1001',
+        'first' => false,
+        'last' => false
+    ]
+];
+$logger->info('Order update', $context);
+
+// update both label and operation again
+$context['stackdriver'] = [
+    'labels' => [
+        'order' => 'fulfilled'
+    ],
+    'operation' => [
+        'id' => 'order-1001',
+        'first' => false,
+        'last' => true
+    ]
+];
+$logger->info('Order update', $context);
+```

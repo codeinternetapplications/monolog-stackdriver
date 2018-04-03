@@ -4,7 +4,7 @@
 
 Add the following entry to the `channels` section in the array below the existing entries.
 
-```
+```php
 'channels' => [
 
     // ( ... )
@@ -15,7 +15,8 @@ Add the following entry to the `channels` section in the array below the existin
         'logName' => 'my-project-log',
         'loggingClientOptions' => [
             'keyFilePath' => '/path/to/service-account-key-file.json',
-        ]
+        ],
+        // 'entryOptionsWrapper' => 'stackdriver'
     ],
 ]
 ```
