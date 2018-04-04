@@ -15,13 +15,13 @@ class CreateStackdriverLogger
      */
     public function __invoke(array $config)
     {
-        $projectId              = $config['logName']                ?? '';
-        $loggingClientOptions   = $config['loggingClientOptions']   ?? [];
-        $entryOptionsWrapperKey = $config['entryOptionsWrapperKey'] ?? 'stackdriver';
-        $level                  = $config['level']                  ?? Logger::DEBUG;
-        $bubble                 = $config['bubble']                 ?? true;
+        $projectId            = $config['logName']              ?? '';
+        $loggingClientOptions = $config['loggingClientOptions'] ?? [];
+        $entryOptionsWrapper  = $config['entryOptionsWrapper']  ?? 'stackdriver';
+        $level                = $config['level']                ?? Logger::DEBUG;
+        $bubble               = $config['bubble']               ?? true;
 
-        $stackdriverHandler = new StackdriverHandler($projectId, $loggingClientOptions, $entryOptionsWrapperKey, $level, $bubble);
+        $stackdriverHandler = new StackdriverHandler($projectId, $loggingClientOptions, $entryOptionsWrapper, $level, $bubble);
 
         $logger = new Logger('stackdriver', [$stackdriverHandler]);
 

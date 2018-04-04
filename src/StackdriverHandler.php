@@ -90,7 +90,7 @@ class StackdriverHandler extends AbstractProcessingHandler
 
         if (isset($record['context'][$this->entryOptionsWrapper])) {
             foreach ($this->entryOptions as $entryOption) {
-                if (isset($record['context'][$this->entryOptionsWrapper][$entryOption]) && $record['context'][$this->entryOptionsWrapper][$entryOption]) {
+                if ($record['context'][$this->entryOptionsWrapper][$entryOption] ?? false) {
                     $options[$entryOption] = $record['context'][$this->entryOptionsWrapper][$entryOption];
                 }
             }
