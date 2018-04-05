@@ -17,11 +17,12 @@ class CreateStackdriverLogger
     {
         $projectId            = $config['logName']              ?? '';
         $loggingClientOptions = $config['loggingClientOptions'] ?? [];
+        $loggerOptions        = $config['loggerOptions'] ?? [];
         $entryOptionsWrapper  = $config['entryOptionsWrapper']  ?? 'stackdriver';
         $level                = $config['level']                ?? Logger::DEBUG;
         $bubble               = $config['bubble']               ?? true;
 
-        $stackdriverHandler = new StackdriverHandler($projectId, $loggingClientOptions, $entryOptionsWrapper, $level, $bubble);
+        $stackdriverHandler = new StackdriverHandler($projectId, $loggingClientOptions, $loggerOptions, $entryOptionsWrapper, $level, $bubble);
 
         $logger = new Logger('stackdriver', [$stackdriverHandler]);
 
