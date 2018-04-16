@@ -86,7 +86,7 @@ $context = ['orderId' => 1001];
 // log entry specific options
 $context['stackdriver'] = [
     'labels' => [
-        'action' => 'payed'
+        'action' => 'paid'
     ]
 ];
 $logger->info('Order update', $context);
