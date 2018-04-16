@@ -20,6 +20,11 @@ If you don't have this file yet, you can create it via [Google Cloud Platform - 
 
 Please read the documentation for the [Google\Cloud\Logging\LoggingClient](https://googlecloudplatform.github.io/google-cloud-php/#/docs/google-cloud/v0.58.1/logging/loggingclient?method=__construct) for other authentication options and further specific connection and setup.
 
+## Google\Cloud\Logging\Logger options
+
+Please read the documentation for the [Google\Cloud\Logging\Logger setup via Google\Cloud\Logging\LoggingClient](https://googlecloudplatform.github.io/google-cloud-php/#/docs/google-cloud/v0.58.1/logging/loggingclient?method=logger) for specific details about these options.
+
+
 ## Google\Cloud\Logging\Entry options
 
 Please read the documentation for the [Google\Cloud\Logging\Entry setup via Google\Cloud\Logging\Logger](http://googlecloudplatform.github.io/google-cloud-php/#/docs/google-cloud/v0.58.1/logging/logger?method=entry) for specific details about these options.

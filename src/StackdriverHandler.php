@@ -43,15 +43,16 @@ class StackdriverHandler extends AbstractProcessingHandler
     /**
      * @param string  $logName              Name of your log
      * @param array   $loggingClientOptions Google\Cloud\Logging\LoggingClient valid options
+     * @param array   $loggerOptions        Google\Cloud\Logging\LoggingClient::logger valid options
      * @param string  $entryOptionsWrapper  Array key used in the context array to take Google\Cloud\Logging\Entry options from
      * @param int     $level                The minimum logging level at which this handler will be triggered
      * @param Boolean $bubble               Whether the messages that are handled can bubble up the stack or not
      */
-    public function __construct($logName, $loggingClientOptions, $entryOptionsWrapper = 'stackdriver', $level = Logger::DEBUG, $bubble = true)
+    public function __construct($logName, $loggingClientOptions, $loggerOptions = [], $entryOptionsWrapper = 'stackdriver', $level = Logger::DEBUG, $bubble = true)
     {
         parent::__construct($level, $bubble);
 
-        $this->logger              = (new LoggingClient($loggingClientOptions))->logger($logName);
+        $this->logger              = (new LoggingClient($loggingClientOptions))->logger($logName, $loggerOptions);
         $this->formatter           = new LineFormatter('%message%');
         $this->entryOptionsWrapper = $entryOptionsWrapper;
     }

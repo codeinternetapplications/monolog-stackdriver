@@ -20,6 +20,7 @@ Make sure to have a [copy of config/logging.php from the Laravel/Laravel 5.6.* f
         'loggingClientOptions' => [
             'keyFilePath' => '/path/to/service-account-key-file.json',
         ],
+        // 'loggerOptions' => [],
         // 'entryOptionsWrapper' => 'stackdriver'
     ],
 ]

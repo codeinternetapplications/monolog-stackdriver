@@ -16,6 +16,7 @@ Add the following entry to the `channels` section in the array below the existin
         'loggingClientOptions' => [
             'keyFilePath' => '/path/to/service-account-key-file.json',
         ],
+        // 'loggerOptions' => [],    
         // 'entryOptionsWrapper' => 'stackdriver'
     ],
 ]
