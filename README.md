@@ -18,18 +18,19 @@ If you don't have this file yet, you can create it via [Google Cloud Platform - 
 
 ## Google\Cloud\Logging\LoggingClient options
 
-Please read the documentation for the [Google\Cloud\Logging\LoggingClient](https://googlecloudplatform.github.io/google-cloud-php/#/docs/google-cloud/v0.58.1/logging/loggingclient?method=__construct) for other authentication options and further specific connection and setup.
+Please read the documentation for the [Google\Cloud\Logging\LoggingClient](https://googlecloudplatform.github.io/google-cloud-php/#/docs/google-cloud/v0.61.0/logging/loggingclient?method=__construct) for other authentication options and further specific connection and setup.
 
 ## Google\Cloud\Logging\Logger options
 
-Please read the documentation for the [Google\Cloud\Logging\Logger setup via Google\Cloud\Logging\LoggingClient](https://googlecloudplatform.github.io/google-cloud-php/#/docs/google-cloud/v0.58.1/logging/loggingclient?method=logger) for specific details about these options.
+Please read the documentation for the [Google\Cloud\Logging\Logger setup via Google\Cloud\Logging\LoggingClient](https://googlecloudplatform.github.io/google-cloud-php/#/docs/google-cloud/v0.61.0/logging/loggingclient?method=logger) for specific details about these options.
 
+This set of options will allow you to set the default resource type and it's related labels that apply to all the logs. Please read [Method: monitoredResourceDescriptors.list](https://cloud.google.com/logging/docs/reference/v2/rest/v2/monitoredResourceDescriptors/list) and do the "Try this API" to get a full list of the specific labels per resource.
 
 ## Google\Cloud\Logging\Entry options
 
-Please read the documentation for the [Google\Cloud\Logging\Entry setup via Google\Cloud\Logging\Logger](http://googlecloudplatform.github.io/google-cloud-php/#/docs/google-cloud/v0.58.1/logging/logger?method=entry) for specific details about these options.
+Please read the documentation for the [Google\Cloud\Logging\Entry setup via Google\Cloud\Logging\Logger](http://googlecloudplatform.github.io/google-cloud-php/#/docs/google-cloud/v0.61.0/logging/logger?method=entry) for specific details about these options.
 
-By default, you can add Stackdriver specific log entry options by adding these wrapped in the `stackdriver`-key inside the context array.
+By default, you can add Stackdriver specific log entry options by adding these wrapped in the `stackdriver`-key inside the context array. Very useful to add log entry specific labels for instance.
 
 ```php
 $context['stackdriver'] = [

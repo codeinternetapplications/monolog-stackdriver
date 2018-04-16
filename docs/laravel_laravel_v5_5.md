@@ -26,7 +26,7 @@ return $app;
 
 ## .env
 
-Finally, edit `.env` to add a new/update entry `APP_LOG`.
+Finally, edit `.env` to add a new/update entry `APP_LOG` with the value `stackdriver`.
 
 ```
 APP_LOG=stackdriver

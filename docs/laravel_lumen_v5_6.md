@@ -6,7 +6,7 @@ Edit `bootstrap/app.php` and enable `$app->withFacades();`.
 
 ## config/logging.php
 
-Make sure to have a [copy of config/logging.php from the Laravel/Laravel 5.6.* framework](https://github.com/laravel/laravel/blob/master/config/logging.php) stored in your project. Then you can add the following entry to the `channels` section in the array below the existing entries.
+Make sure to have a [copy of config/logging.php from the Laravel/Lumen-framework 5.6.* framework](https://github.com/laravel/lumen-framework/blob/5.6/config/logging.php) stored in your project at `/config/logging.php`. Then you can add the following entry to the `channels` section in the array below the existing entries.
 
 ```php
 'channels' => [
@@ -21,7 +21,8 @@ Make sure to have a [copy of config/logging.php from the Laravel/Laravel 5.6.* f
             'keyFilePath' => '/path/to/service-account-key-file.json',
         ],
         // 'loggerOptions' => [],
-        // 'entryOptionsWrapper' => 'stackdriver'
+        // 'lineFormat' => '%message%',
+        // 'entryOptionsWrapper' => 'stackdriver',
     ],
 ]
 ```

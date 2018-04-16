@@ -16,15 +16,16 @@ Add the following entry to the `channels` section in the array below the existin
         'loggingClientOptions' => [
             'keyFilePath' => '/path/to/service-account-key-file.json',
         ],
-        // 'loggerOptions' => [],    
-        // 'entryOptionsWrapper' => 'stackdriver'
+        // 'loggerOptions' => [],
+        // 'lineFormat' => '%message%',
+        // 'entryOptionsWrapper' => 'stackdriver',
     ],
 ]
 ```
 
 ## .env
 
-Edit `.env` to update `LOG_CHANNEL`.
+Edit `.env` to update `LOG_CHANNEL` to `stackdriver`.
 
 ```
 LOG_CHANNEL=stackdriver
