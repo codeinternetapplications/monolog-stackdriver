@@ -44,8 +44,10 @@ If you need to, you can override this key name by setting `$entryOptionsWrapper`
 
 * [Laravel/Laravel v5.5](docs/laravel_laravel_v5_5.md)
 * [Laravel/Laravel v5.6](docs/laravel_laravel_v5_6.md)
+* [Laravel/Laravel v5.7](docs/laravel_laravel_v5_7.md)
 * [Laravel/Lumen v5.5](docs/laravel_lumen_v5_5.md)
 * [Laravel/Lumen v5.6](docs/laravel_lumen_v5_6.md)
+* [Laravel/Lumen v5.7](docs/laravel_lumen_v5_7.md)
 
 # Vanilla usage
 
