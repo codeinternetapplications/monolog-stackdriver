@@ -65,6 +65,10 @@ $loggingClientOptions = [
     'keyFilePath' => '/path/to/service-account-key-file.json'
 ];
 
+// It is also possible to set path to credentials and project id via the global constant
+define('GOOGLE_APPLICATION_CREDENTIALS', '/path/to/service-account-key-file.json'); 
+define('GOOGLE_CLOUD_PROJECT', 'eg-my-project-id-148223'); 
+
 // init handler
 $stackdriverHandler = new StackdriverHandler(
     $projectId,
