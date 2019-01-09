@@ -26,6 +26,8 @@ Please read the documentation for the [Google\Cloud\Logging\Logger setup via Goo
 
 This set of options will allow you to set the default resource type and it's related labels that apply to all the logs. Please read [Method: monitoredResourceDescriptors.list](https://cloud.google.com/logging/docs/reference/v2/rest/v2/monitoredResourceDescriptors/list) and do the "Try this API" to get a full list of the specific labels per resource.
 
+You can override these at runtime by calling `appendLoggerOptions`/`setLoggerOptions` on your `StackdriverHandler` instance.
+
 ## Google\Cloud\Logging\Entry options
 
 Please read the documentation for the [Google\Cloud\Logging\Entry setup via Google\Cloud\Logging\Logger](http://googlecloudplatform.github.io/google-cloud-php/#/docs/google-cloud/v0.61.0/logging/logger?method=entry) for specific details about these options.
