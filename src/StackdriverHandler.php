@@ -40,6 +40,13 @@ class StackdriverHandler extends AbstractProcessingHandler
         'timestamp',
     ];
 
+
+    /**
+     * Default logger options to use (Google\Cloud\Logging\LoggingClient::logger valid options). Will be merged with entryOptions when logging
+     * @var array Logger options.
+     */
+    private $loggerOptions;
+
     /**
      * @param string  $logName              Name of your log
      * @param array   $loggingClientOptions Google\Cloud\Logging\LoggingClient valid options
@@ -53,7 +60,8 @@ class StackdriverHandler extends AbstractProcessingHandler
     {
         parent::__construct($level, $bubble);
 
-        $this->logger              = (new LoggingClient($loggingClientOptions))->logger($logName, $loggerOptions);
+        $this->logger              = (new LoggingClient($loggingClientOptions))->logger($logName);
+        $this->loggerOptions       = $loggerOptions;
         $this->formatter           = new LineFormatter($lineFormat);
         $this->entryOptionsWrapper = $entryOptionsWrapper;
     }
@@ -86,14 +94,14 @@ class StackdriverHandler extends AbstractProcessingHandler
      */
     private function getOptionsFromRecord(array &$record)
     {
-        $options = [
+        $options = $this->loggerOptions + [
             'severity' => $record['level_name']
         ];
 
         if (isset($record['context'][$this->entryOptionsWrapper])) {
             foreach ($this->entryOptions as $entryOption) {
                 if ($record['context'][$this->entryOptionsWrapper][$entryOption] ?? false) {
-                    $options[$entryOption] = $record['context'][$this->entryOptionsWrapper][$entryOption];
+                    $options[$entryOption] = ($options[$entryOption] ?? []) + $record['context'][$this->entryOptionsWrapper][$entryOption];
                 }
             }
             unset($record['context'][$this->entryOptionsWrapper]);
