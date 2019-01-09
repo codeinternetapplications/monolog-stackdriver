@@ -31,13 +31,13 @@ class StackdriverHandler extends AbstractProcessingHandler
      * Log entry options (all but severity) as supported by Google\Cloud\Logging\Logger::entry
      * @var array Entry options.
      */
-    private $entryOptions = [
-        'resource',
-        'httpRequest',
-        'labels',
-        'operation',
-        'insertId',
-        'timestamp',
+    private $entryOptionsAllowedKeys = [
+        'resource' => [],
+        'httpRequest' => [],
+        'labels' => [],
+        'operation' => [],
+        'insertId' => '',
+        'timestamp' => '',
     ];
 
 
@@ -61,9 +61,29 @@ class StackdriverHandler extends AbstractProcessingHandler
         parent::__construct($level, $bubble);
 
         $this->logger              = (new LoggingClient($loggingClientOptions))->logger($logName);
-        $this->loggerOptions       = $loggerOptions;
+        $this->loggerOptions       = (array) $loggerOptions;
         $this->formatter           = new LineFormatter($lineFormat);
         $this->entryOptionsWrapper = $entryOptionsWrapper;
+    }
+
+    public function appendLoggerOptions($key, $value)
+    {
+        return $this->setLoggerOptions($key, $value, true);
+    }
+
+    public function setLoggerOptions($key, $value, $append = false)
+    {
+        if (!array_key_exists($key, $this->entryOptionsAllowedKeys)) {
+            throw new \Exception('Unsupported logger option ' . $key);
+        }
+
+        if ($append) {
+            $this->loggerOptions[$key] = ($this->loggerOptions[$key] ?? $this->entryOptionsAllowedKeys[$key]) + $value;
+        } else {
+            $this->loggerOptions[$key] = $value;
+        }
+
+        return true;
     }
 
     /**
@@ -99,7 +119,7 @@ class StackdriverHandler extends AbstractProcessingHandler
         ];
 
         if (isset($record['context'][$this->entryOptionsWrapper])) {
-            foreach ($this->entryOptions as $entryOption) {
+            foreach (array_keys($this->entryOptionsAllowedKeys) as $entryOption) {
                 if ($record['context'][$this->entryOptionsWrapper][$entryOption] ?? false) {
                     $options[$entryOption] = ($options[$entryOption] ?? []) + $record['context'][$this->entryOptionsWrapper][$entryOption];
                 }
