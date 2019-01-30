@@ -20,7 +20,7 @@
     "require": {
         "php": ">=7.0.0",
         "monolog/monolog": ">=1.23",
-        "google/cloud": ">=0.50.0"
+        "google/cloud-logging": "^1.12"
     },
     "autoload": {
         "psr-4": {

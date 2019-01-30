@@ -40,6 +40,12 @@ $context['stackdriver'] = [
 
 If you need to, you can override this key name by setting `$entryOptionsWrapper` to your own value (string) when using `StackdriverHandler::__construct`.
 
+It is also possible to set path to credentials and project id via the global constant.
+```php
+define('GOOGLE_APPLICATION_CREDENTIALS', '/path/to/service-account-key-file.json'); 
+define('GOOGLE_CLOUD_PROJECT', 'eg-my-project-id-148223');
+```
+
 ## Pick your framework for some specific setup
 
 * [Laravel/Laravel v5.5](docs/laravel_laravel_v5_5.md)
