@@ -19,8 +19,8 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "monolog/monolog": ">=1.23",
-        "google/cloud": ">=0.50.0"
+        "monolog/monolog": "^1.23",
+        "google/cloud": "^0.50.0"
     },
     "autoload": {
         "psr-4": {
