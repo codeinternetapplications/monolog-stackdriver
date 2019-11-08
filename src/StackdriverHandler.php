@@ -64,7 +64,7 @@ class StackdriverHandler extends AbstractProcessingHandler
      * @param  array $record
      * @return void
      */
-    protected function write(array $record)
+    protected function write(array $record): void
     {
         $options = $this->getOptionsFromRecord($record);
 
@@ -84,7 +84,7 @@ class StackdriverHandler extends AbstractProcessingHandler
      * @param  array $record by reference
      * @return array $options
      */
-    private function getOptionsFromRecord(array &$record)
+    private function getOptionsFromRecord(array &$record): array
     {
         $options = [
             'severity' => $record['level_name']
