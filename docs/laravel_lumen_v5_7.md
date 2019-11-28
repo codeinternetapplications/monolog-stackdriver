@@ -17,9 +17,9 @@ Make sure to have a [copy of config/logging.php from the Laravel/Lumen-framework
         'driver' => 'custom',
         'via' => CodeInternetApplications\MonologStackdriver\Laravel\CreateStackdriverLogger::class,
         'logName' => 'my-project-log',
-        'loggingClientOptions' => [
-            'keyFilePath' => '/path/to/service-account-key-file.json',
-        ],
+        // 'loggingClientOptions' => [
+        //     'keyFilePath' => '/path/to/service-account-key-file.json',
+        // ],
         // 'loggerOptions' => [],
         // 'lineFormat' => '%message%',
         // 'entryOptionsWrapper' => 'stackdriver',
@@ -29,7 +29,8 @@ Make sure to have a [copy of config/logging.php from the Laravel/Lumen-framework
 
 ## .env
 
-Finally, edit `.env` to update `LOG_CHANNEL` to `stackdriver`.
+Edit `.env` to update `LOG_CHANNEL` to `stackdriver`.
+And finally add `GOOGLE_APPLICATION_CREDENTIALS` and `GOOGLE_CLOUD_PROJECT` or use loggingClientOptions to set path to key file and project id.
 
 ```
 LOG_CHANNEL=stackdriver
