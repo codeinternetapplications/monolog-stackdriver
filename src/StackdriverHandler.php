@@ -38,6 +38,7 @@ class StackdriverHandler extends AbstractProcessingHandler
         'operation',
         'insertId',
         'timestamp',
+        'logName'
     ];
 
     /**
