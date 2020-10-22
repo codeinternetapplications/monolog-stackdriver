@@ -75,7 +75,13 @@ class StackdriverHandler extends AbstractProcessingHandler
 
         $entry = $this->logger->entry($data, $options);
 
-        $this->logger->write($entry);
+        try{
+            $this->logger->write($entry);
+        } catch (\Google\Cloud\Core\Exception\ServiceException $exception) {
+            error_log("Error connecting to Google services: " . $exception->getMessage());
+        } catch(\Exception $exception) {
+            throw $exception;
+        }
     }
 
     /**
